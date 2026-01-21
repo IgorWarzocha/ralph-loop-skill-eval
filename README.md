@@ -10,8 +10,8 @@ Please note that since this is generative AI, I cannot guarantee 100% parsing, s
 ./run-loop.sh --agent build --model opencode/glm-4.7-free
 ```
 
-The script copies skills, generates prompts (5 passes), runs evals, and loops until all
-prompts pass.
+The script copies skills, generates prompts (you must read if they are casual enough and accept/regenerate), runs evals, and loops until all
+prompts pass the sniff test.
 
 <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/b56c456b-cd46-443f-b823-9e1d74aefa64" />
 
