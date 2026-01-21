@@ -1,15 +1,8 @@
 # Skill Eval Workspace
 
-Standalone environment for skill prompt generation and evaluation.
+Standalone environment for skill prompt generation and evaluation. Loosely based on Ralph Loop principles. Will work until skill descriptions align with use cases, based on embedder matching them up. Copies your global skills, analyses them, generates user scenario prompts, then works on the frontmatter description. When all tests pass, outputs a merged version of the skill, with a refined frontmatter.
 
-## Layout
-
-- `skill/` raw skills copied from a source directory
-- `agent/` prompt generator workspace
-- `agent/skill/` frontmatter-only skills for prompt generation
-- `prompts/` scenario prompts for generating rambly queries
-- `loop/` eval workspace (frontmatter-only skills + PROMPTS.md)
-- `eval/` evaluation scripts and results
+Please note that since this is generative AI, I cannot guarantee 100% parsing, so you might need to fix it a bit when done.
 
 ## One-Command Loop
 
@@ -19,6 +12,17 @@ Standalone environment for skill prompt generation and evaluation.
 
 The script copies skills, generates prompts (5 passes), runs evals, and loops until all
 prompts pass.
+
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/b56c456b-cd46-443f-b823-9e1d74aefa64" />
+
+## Layout
+
+- `skill/` raw skills copied from a source directory
+- `agent/` prompt generator workspace
+- `agent/skill/` frontmatter-only skills for prompt generation
+- `prompts/` scenario prompts for generating rambly queries
+- `loop/` eval workspace (frontmatter-only skills + PROMPTS.md)
+- `eval/` evaluation scripts and results
 
 ### Parameters
 
