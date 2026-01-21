@@ -1,6 +1,12 @@
-node_modules
+# Local state
+.opencode/
+eval/skill-eval.db
+eval/results.md
+
+# Directories
 skill/
-agent/
-loop/
 skill-updated/
-.DS_Store
+agent/PROMPTS.md
+loop/PROMPTS.md
+agent/skill/
+loop/skill/
