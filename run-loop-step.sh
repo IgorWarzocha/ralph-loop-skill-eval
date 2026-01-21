@@ -45,7 +45,7 @@ if [[ "$START_EVAL" == "false" ]]; then
   mkdir -p "$ROOT_DIR/skill" "$ROOT_DIR/agent" "$ROOT_DIR/agent/skill" "$ROOT_DIR/loop" "$ROOT_DIR/loop/skill"
 
   echo "Step 0: Install dependencies"
-  (cd "$ROOT_DIR" && bun install)
+  (cd "$ROOT_DIR" && npm install)
 
   echo "Step 1: Copy global skills to skill/"
   rm -rf "$ROOT_DIR/skill"/*

@@ -39,6 +39,9 @@ UPDATED_DIR="$ROOT_DIR/skill-updated"
 
 mkdir -p "$ROOT_DIR/skill" "$ROOT_DIR/agent" "$ROOT_DIR/agent/skill" "$ROOT_DIR/loop" "$ROOT_DIR/loop/skill"
 
+echo "Installing dependencies"
+(cd "$ROOT_DIR" && npm install)
+
 rm -rf "$ROOT_DIR/skill"/*
 cp -R "$SKILL_SRC"/. "$ROOT_DIR/skill"
 

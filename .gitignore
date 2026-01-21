@@ -3,6 +3,10 @@
 eval/skill-eval.db
 eval/results.md
 
+# Dependencies
+node_modules/
+package-lock.json
+
 # Directories
 skill/
 skill-updated/
