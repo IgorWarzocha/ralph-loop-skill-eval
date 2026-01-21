@@ -94,7 +94,12 @@ if [[ "$START_EVAL" == "false" ]]; then
       if [[ "$launched" == "true" ]]; then
         # Wait for the actual completion without a timeout
         wait $pid
-        return $?
+        local exit_code=$?
+        if [[ $exit_code -ne 0 ]]; then
+          echo "opencode failed with exit code $exit_code; retrying..."
+          continue
+        fi
+        return 0
       else
         echo "opencode failed to launch within 20s; retrying..."
         kill -9 $pid 2>/dev/null || true
@@ -157,14 +162,18 @@ else
 fi
 
 echo "Step 5: Run eval"
-(cd "$ROOT_DIR/loop" && bun run "../eval/eval.ts")
+while true; do
+  (cd "$ROOT_DIR/loop" && bun run "../eval/eval.ts")
 
-echo "Step 6: If FAIL, run eval agent pass"
-if rg -q "Status: FAIL" "$ROOT_DIR/loop/results.md"; then
-  run_opencode "$ROOT_DIR/loop" "$EVAL_PATH"
-  echo "Re-run Step 5 after edits."
-  exit 1
-fi
+  if rg -q "Status: FAIL" "$ROOT_DIR/loop/results.md"; then
+    echo "Step 6: Running eval agent pass to fix failures"
+    run_opencode "$ROOT_DIR/loop" "$EVAL_PATH"
+    echo "Re-running eval after agent edits..."
+  else
+    echo "All prompts passed!"
+    break
+  fi
+done
 
 echo "Step 7: Write updated skills"
 bun run "$ROOT_DIR/eval/merge-frontmatter.ts" "$SKILL_SRC" "$ROOT_DIR/loop/skill" "$ROOT_DIR/skill-updated"

@@ -84,16 +84,21 @@ run_opencode() {
       count=$((count + 1))
     done
 
-    if [[ "$launched" == "true" ]]; then
-      # Wait for the actual completion without a timeout
-      wait $pid
-      return $?
-    else
-      echo "opencode failed to launch within 20s; retrying..."
-      kill -9 $pid 2>/dev/null || true
-      wait $pid 2>/dev/null || true
-      continue
-    fi
+      if [[ "$launched" == "true" ]]; then
+        # Wait for the actual completion without a timeout
+        wait $pid
+        local exit_code=$?
+        if [[ $exit_code -ne 0 ]]; then
+          echo "opencode failed with exit code $exit_code; retrying..."
+          continue
+        fi
+        return 0
+      else
+        echo "opencode failed to launch within 20s; retrying..."
+        kill -9 $pid 2>/dev/null || true
+        wait $pid 2>/dev/null || true
+        continue
+      fi
   done
 }
 
