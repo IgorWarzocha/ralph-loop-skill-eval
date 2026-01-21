@@ -98,7 +98,7 @@ while true; do
   run_opencode "$ROOT_DIR/agent" "$SCENARIOS_PATH"
   
   echo "Please read $ROOT_DIR/agent/PROMPTS.md."
-  echo "Do these prompts look like something you would normally type, or do they need to be more casual? (y/n)"
+  echo "Prompts ready to use. Regenerate? (y/n)"
   read -r response
   if [[ "$response" != "y" ]]; then
     break
