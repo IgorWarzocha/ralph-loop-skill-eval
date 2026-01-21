@@ -1,0 +1,6 @@
+node_modules
+skill/
+agent/
+loop/
+skill-updated/
+.DS_Store
